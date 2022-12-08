@@ -4,7 +4,8 @@ import sys
 
 
 def read_file():
-    """Function to open and read file with tasks list."""
+    """Function to open and read file with tasks list.
+    Returns - list - tasks outline."""
     tasks_list = []
     with open("todo.txt", "r", encoding="utf-8") as file:
         for line in file:
@@ -14,7 +15,8 @@ def read_file():
 
 
 def list_items():
-    """List all tasks."""
+    """List all tasks.
+    If there is no tasks prints message."""
     tasks = read_file()
     if len(tasks) == 0:
         print("No todos for today! :)")
@@ -23,6 +25,15 @@ def list_items():
             sys.stdout.buffer.write(
                 f"{idx+1} - {item}".encode("utf8"))
             sys.stdout.buffer.write("\n".encode("utf8"))
+
+
+def add_task(new_tasks):
+    """Function for adding task to the todo.txt.
+    Argument - str - task."""
+    with open("todo.txt", "a", encoding="utf-8") as file:
+        for idx_t in new_tasks:
+            file.write(idx_t)
+            file.write("\n")
 
 
 def info():
@@ -45,8 +56,11 @@ if __name__ == "__main__":
         if args[0] == "todo.py":
             if len(args) == 1:
                 globals()["info"]()
-            if args[1] == "-l":
+            elif args[1] == "-l":
                 args[1] = "list_items"
                 globals()[args[1]]()
+            elif args[1] == "-a":
+                args[1] = "add_task"
+                globals()[args[1]](args[2:])
     except IndexError:
         pass
