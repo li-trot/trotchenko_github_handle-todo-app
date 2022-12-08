@@ -73,6 +73,9 @@ if __name__ == "__main__":
         if args[0] == "todo.py":
             if len(args) == 1:
                 globals()["info"]()
+            elif args[1] not in ["-a", "-l", "-r", "-c"]:
+                print("Unsupported argument \n")
+                globals()["info"]()
             elif args[1] == "-l":
                 args[1] = "list_items"
                 globals()[args[1]]()
