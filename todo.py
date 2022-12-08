@@ -36,6 +36,17 @@ def add_task(new_tasks):
             file.write("\n")
 
 
+def remove_task(number):
+    """Remove task from list of tasks with particular index.
+    Argument - number."""
+    num_del = int(number) - 1
+    tasks = read_file()
+    with open("todo.txt", "w", encoding="utf-8") as file:
+        for num, line in enumerate(tasks):
+            if num != num_del:
+                file.write(line+"\n")
+
+
 def info():
     """Prints usage functions of todo list."""
     text = (
@@ -65,6 +76,9 @@ if __name__ == "__main__":
                     print("Unable to add: no task provided")
                 else:
                     globals()[args[1]](args[2:])
+            elif args[1] == "-r":
+                args[1] = "remove_task"
+                globals()[args[1]](args[2])
 
     except IndexError:
         pass
