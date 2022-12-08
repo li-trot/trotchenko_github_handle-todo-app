@@ -16,6 +16,8 @@ def read_file():
 def list_items():
     """List all tasks."""
     tasks = read_file()
+    if len(tasks) == 0:
+        print("No todos for today! :)")
     if len(tasks) > 0:
         for idx, item in enumerate(tasks):
             sys.stdout.buffer.write(
