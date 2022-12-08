@@ -39,12 +39,18 @@ def add_task(new_tasks):
 def remove_task(number):
     """Remove task from list of tasks with particular index.
     Argument - number."""
-    num_del = int(number) - 1
-    tasks = read_file()
-    with open("todo.txt", "w", encoding="utf-8") as file:
-        for num, line in enumerate(tasks):
-            if num != num_del:
-                file.write(line+"\n")
+    try:
+        num_del = int(number)
+        tasks = read_file()
+        if len(tasks) < num_del:
+            print("Unable to remove: index is out of bound")
+        else:
+            with open("todo.txt", "w", encoding="utf-8") as file:
+                for num, line in enumerate(tasks):
+                    if num != (num_del - 1):
+                        file.write(line+"\n")
+    except ValueError:
+        print("Unable to remove: index is not a number")
 
 
 def info():
@@ -78,7 +84,10 @@ if __name__ == "__main__":
                     globals()[args[1]](args[2:])
             elif args[1] == "-r":
                 args[1] = "remove_task"
-                globals()[args[1]](args[2])
+                if len(args) < 3:
+                    print("Unable to remove: no index provided")
+                else:
+                    globals()[args[1]](args[2])
 
     except IndexError:
         pass
