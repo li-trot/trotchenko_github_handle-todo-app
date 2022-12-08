@@ -1,3 +1,7 @@
-Walk the dog
-Buy milk
-Do homework
+[x] eat cake
+[x] drink milk
+[x] eat cake
+[x] sleep
+[ ] drink milk
+[ ] eat cake
+[x] sleep
