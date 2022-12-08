@@ -61,6 +61,10 @@ if __name__ == "__main__":
                 globals()[args[1]]()
             elif args[1] == "-a":
                 args[1] = "add_task"
-                globals()[args[1]](args[2:])
+                if len(args) < 3:
+                    print("Unable to add: no task provided")
+                else:
+                    globals()[args[1]](args[2:])
+
     except IndexError:
         pass
