@@ -101,31 +101,30 @@ if __name__ == "__main__":
         if len(args) == 1:
             globals()["info"]()
     # wrong argument - print information
-        elif args[1] not in ["-a", "-l", "-r", "-c"]:
-            print("Unsupported argument \n")
-            globals()["info"]()
+        elif args[1] in ["-a", "-r", "-c"]:
+            # add tasks
+            if args[1] == "-a":
+                args[1] = "add_task"
+                if len(args) < 3:
+                    print("Unable to add: no task provided")
+        # remove index task
+            elif args[1] == "-r":
+                args[1] = "remove_task"
+                if len(args) < 3:
+                    print("Unable to remove: no index provided")
+        # done task
+            elif args[1] == "-c":
+                args[1] = "check_task"
+                if len(args) < 3:
+                    print("Unable to check: no index provided")
+            globals()[args[1]](args[2:])
     # list tasks
         elif args[1] == "-l":
             args[1] = "list_items"
             globals()[args[1]]()
-    # add tasks
-        elif args[1] == "-a":
-            args[1] = "add_task"
-            if len(args) < 3:
-                print("Unable to add: no task provided")
-            else:
-                globals()[args[1]](args[2:])
-    # remove index task
-        elif args[1] == "-r":
-            args[1] = "remove_task"
-            if len(args) < 3:
-                print("Unable to remove: no index provided")
-            else:
-                globals()[args[1]](args[2:])
-    # done task
-        elif args[1] == "-c":
-            args[1] = "check_task"
-            globals()[args[1]](args[2:])
+        else:
+            print("Unsupported argument \n")
+            globals()["info"]()
 
     except IndexError:
         print("Error")

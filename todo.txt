@@ -1,7 +1,3 @@
-[x] eat cake
-[x] drink milk
-[x] eat cake
-[x] sleep
-[ ] drink milk
-[ ] eat cake
-[x] sleep
+[ ] Walk the dog
+[x] Buy milk
+[ ] Do homework
